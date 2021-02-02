@@ -9,4 +9,12 @@ export function useLocalStorage(key, initialValue) {
         //if not, we set the initial value as storedValue state
         return item ? JSON.parse(item) : initialValue;
     });
-}
+    const setValue = (value) => {
+        //first set the state of stored value
+        setStoredValue(value);
+        //put the key:value in local storage
+        window.localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    return [storedValue, setValue];
+};
